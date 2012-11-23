@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+           
+       <!-- 静态工厂方法 -->    
+     <!--   <bean id="factory" class="cn.jackey.factory.UserServiceFactory" factory-method="newInstance">    
+       	<constructor-arg name="message" value="name"/>
+       </bean>  -->
+       
+       <!-- 实例工厂方法 -->
+   	<!-- 	<bean id="beanFactory" class="cn.jackey.factory.UserServiceFactory"/>
+   		<bean id="bean" factory-bean="beanFactory" factory-method="newInstance">
+   			<constructor-arg index="0" value="实例化工厂方法获取bean"/>
+   		</bean> -->
+   		
+   		<!-- <bean id="byName" class="cn.jackey.service.UserService">
+   		   <constructor-arg name="string" value="byName"/>
+   		</bean> -->
+   		
+   		<!-- setter方法注入 -->
+   		<!-- <bean id="forumService" class="cn.jackey.service.ForumService">
+   			<property name="list" >
+   			    <list>
+   			    	<value>aaaa</value>
+   			    	<value>bbbb</value>
+   			    	<value>cccc</value>
+   			    	<value>dddd</value>
+   			    </list>
+   			</property>
+   		</bean> -->
+   		
+   		<!-- 对象导航注入 -->
+   		<!-- <bean id="orderService" class="cn.jackey.service.OrderService"/>
+   		<bean id="userService" class="cn.jackey.service.UserService">
+   		  <property name="list"><list></list></property>
+   		</bean>
+   		
+   		<bean id="forumService" class="cn.jackey.service.ForumService">
+   		   <property name="userService" ref="userService"/>
+   		   <property name="userService.orderService" ref="orderService"/>
+   		   <property name="userService.list[0]" ref="orderService"/>
+   		</bean> -->
+   		
+   		<!-- 循环依赖注入 -->
+   		<!-- <bean id="forumService" class="cn.jackey.service.ForumService" scope="prototype">
+   		   <property name="userService" ref="userService"/>
+   		</bean> 
+   		<bean id="userService" class="cn.jackey.service.UserService" scope="prototype">
+   		   <property name="orderService" ref="orderService"/>
+   		</bean> 
+   		<bean id="orderService" class="cn.jackey.service.ForumService" scope="prototype">
+   		   <property name="forumService" ref="forumService"/>
+   		</bean>  -->
+   		
+   		<!-- depends-on -->
+   		<!-- <bean id="resourceBean" class="cn.jackey.bean.ResourceBean"
+   		init-method="init"  destroy-method="destory">
+   			<property name="file" value="e:/test.txt"></property>
+   		</bean>
+   		<bean id="dependentBean" class="cn.jackey.bean.DependentBean"
+   		init-method="init" destroy-method="destory" depends-on="resourceBean">
+   			<property name="resourceBean" ref="resourceBean"/>
+   		</bean> -->
+   		
+   		<!-- autowire -->
+   		<!-- <bean id="helloImpl" class="cn.jackey.autowire.HelloImpl"/>
+   		<bean id="autowire" class="cn.jackey.autowire.AutoWireBean" autowire="byType"/> -->
+   		
+   		<!-- 方法注入-方法查找模式 -->
+   		<!-- <bean id="prototypePrinter" class="cn.jackey.method.Printer" scope="prototype"/>
+   		<bean id="singletonPrinter" class="cn.jackey.method.Printer" scope="singleton"/>
+   		<bean id="helloApi" class="cn.jackey.method.HelloApiImpl" scope="singleton">
+   			<property name="printer" ref="prototypePrinter"/>
+   			<lookup-method name="createPrototypePrinter" bean="prototypePrinter"/>
+   			<lookup-method name="createSingletonPrinter" bean="singletonPrinter"/>
+   		</bean>
+   		<bean id="helloApi2" class="cn.jackey.method.HelloApiImpl" scope="prototype">
+   			<property name="printer" ref="prototypePrinter"/>
+   			<lookup-method name="createPrototypePrinter" bean="prototypePrinter"/>
+   			<lookup-method name="createSingletonPrinter" bean="singletonPrinter"/>
+   		</bean> -->
+   		
+   		<!--方法注入-方法替换  -->
+   		<!-- <bean id="replacerMethod" class="cn.jackey.method.ReplacerMethod"/>
+   		<bean id="printer" class="cn.jackey.method.Printer">
+			<replaced-method name="print" replacer="replacerMethod">
+				<arg-type>java.lang.String</arg-type>
+			</replaced-method>   		
+   		</bean> -->
+   		
+   		<!--  -->
+   		<bean id="bean" class="cn.jackey.resource.ResourceBean">
+   			<property name="resource" value="cn/jackey/resource/test.properties"/>
+   		</bean>
+   		
+   		<bean id="bean2" class="cn.jackey.resource.ResourceBean">
+   			<property name="resource" value="classpath:cn/jackey/resource/test.properties"/>
+   		</bean>
+   		
+</beans>
