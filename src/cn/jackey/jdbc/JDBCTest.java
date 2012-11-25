@@ -26,11 +26,11 @@ public class JDBCTest {
 	    
 	    @BeforeClass
 	    public static void setUpClass() {
-	        String url = "jdbc:jtds:sqlserver://192.168.16.30:1433/spring;instance=sql2005";
-	        String username = "itvgame";
-	        String password = "itvgame";
+	        String url = "jdbc:mysql://localhost:3306/spring?characterEncoding=GBK";
+	        String username = "root";
+	        String password = "root";
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource(url, username, password);
-	        dataSource.setDriverClassName("net.sourceforge.jtds.jdbc.Driver");
+	        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 	        jdbcTemplate = new JdbcTemplate(dataSource);
 	    }
 	    
@@ -54,11 +54,11 @@ public class JDBCTest {
 	    public void test(){
 	    	 //id自增主键从0开始
 	        /*String createTableSql = "create table test" +
-	        "(id int not null identity(10000, 1), " +
-	        "name varchar(100))";
-	        jdbcTemplate.update(createTableSql);*/
+	        "(id int not null auto_increment, " +
+	        "name varchar(100),primary key(id))engine=InnoDB auto_increment=10000";
+	        jdbcTemplate.update(createTableSql);
 	    	
-	    	/*String  insertSql = "insert into test(name) values(?)";
+	    	String  insertSql = "insert into test(name) values(?)";
 	    	for(int i=0;i<10;i++){
 	    		jdbcTemplate.update(insertSql,"jackey"+i);
 	    	}*/
